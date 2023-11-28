@@ -10,7 +10,7 @@ class PostController extends Controller
 {
     public function index(Post $post)
     {
-        return view('posts/index')->with(['posts' => $post->getPaginateByLimit(1)]);
+        return view('posts/index')->with(['posts' => $post->getPaginateByLimit(5)]);
     }
     
     public function show(Post $post)
@@ -20,9 +20,6 @@ class PostController extends Controller
     
     public function create()
     {
-<<<<<<< HEAD
-        return view('posts/create');
-=======
         return view('posts.create');
     }
     
@@ -31,7 +28,18 @@ class PostController extends Controller
         $input = $request['post'];
         $post->fill($input)->save();
         return redirect('/posts/' . $post->id);
->>>>>>> dev_basis04
+    }
+    
+    public function edit(post $post)
+    {
+        return view('posts/edit')->with(['post' => $post]);
+    }
+    
+    public function update(PostRequest $request, post $post)
+    {
+        $input_post = $request['post'];
+        $post->fill($input_post)->save();
+        return redirect('/posts/' . $post->id);
     }
 }
 ?>
